@@ -1,0 +1,19 @@
+.galaxy-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+/* Isolate WebGL from form repaints (reduces flicker while typing) */
+.galaxy-backdrop-layer {
+  isolation: isolate;
+  transform: translateZ(0);
+  contain: paint;
+}
+
+.galaxy-container canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+  background-color: #020617;
+}

@@ -1,0 +1,87 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  background-color: #020617;
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #020617;
+  min-height: 100%;
+}
+
+#root {
+  min-height: 100vh;
+  background-color: #020617;
+}
+
+@layer components {
+  .galaxy-page-bg {
+    @apply fixed inset-0 z-0 pointer-events-none;
+  }
+
+  .galaxy-page-bg--interactive {
+    @apply z-0;
+    pointer-events: auto;
+  }
+
+  .auth-glass-panel {
+    @apply rounded-2xl p-10 w-full max-w-sm text-center relative z-10;
+    background: rgba(15, 23, 42, 0.62);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid rgba(34, 211, 238, 0.22);
+    box-shadow:
+      0 25px 50px -12px rgba(0, 0, 0, 0.5),
+      0 0 48px rgba(34, 211, 238, 0.06);
+    contain: paint;
+    isolation: isolate;
+  }
+
+  .auth-input {
+    @apply w-full px-3 py-2.5 mb-4 rounded-lg border text-left outline-none text-cyan-50 placeholder:text-slate-400;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    background: rgba(2, 6, 23, 0.55);
+    border-color: rgba(6, 182, 212, 0.28);
+  }
+
+  .auth-input:focus {
+    border-color: rgba(34, 211, 238, 0.55);
+    box-shadow: 0 0 0 1px rgba(34, 211, 238, 0.28);
+  }
+
+  .auth-btn-primary {
+    @apply w-full py-2.5 rounded-lg border-0 font-medium transition text-white shadow-lg;
+    background: linear-gradient(135deg, rgb(8 145 178), rgb(13 148 136));
+    box-shadow: 0 10px 25px -5px rgba(8, 51, 68, 0.45);
+  }
+
+  .auth-btn-primary:hover:not(:disabled) {
+    @apply brightness-110;
+  }
+
+  .auth-btn-primary:disabled {
+    @apply opacity-60 cursor-not-allowed;
+  }
+
+  .dashboard-glass {
+    @apply rounded-2xl p-5 md:p-6 relative;
+    background: rgba(15, 23, 42, 0.55);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(34, 211, 238, 0.18);
+    box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.45);
+    contain: paint;
+    isolation: isolate;
+  }
+
+  .dashboard-glass-muted {
+    @apply rounded-xl p-4;
+    background: rgba(15, 23, 42, 0.42);
+    border: 1px solid rgba(103, 232, 249, 0.12);
+  }
+}
