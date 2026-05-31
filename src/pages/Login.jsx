@@ -21,7 +21,7 @@ function Login() {
     setLoading(true);
 
     try {
-      const data = await request("/users/login", "POST", {
+      const data = await request("/api/users/login", "POST", {
         email,
         password,
       });
