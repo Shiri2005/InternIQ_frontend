@@ -17,7 +17,7 @@ export default function QuizPage() {
   useEffect(() => {
     async function fetchQuiz() {
       try {
-        const data = await request(`/quizzes/${id}`);
+        const data = await request(`/api/quizzes/${id}`);
         setQuiz(data);
         setAnswers(new Array(data.questions.length).fill(null));
       } catch (err) {
@@ -36,7 +36,7 @@ export default function QuizPage() {
   async function handleSubmit() {
     try {
       setSubmitError("");
-      const res = await request(`/quizzes/${id}/submit`, "POST", {
+      const res = await request(`/api/quizzes/${id}/submit`, "POST", {
         answers
       });
       setResult(res);

@@ -52,7 +52,7 @@ export default function Admin() {
   };
 
   const loadUsers = async () => {
-    const data = await request("/users");
+    const data = await request("/api/users");
     setUsers(data || []);
 
     const nextTiers = {};
@@ -63,7 +63,7 @@ export default function Admin() {
   };
 
   const loadOverview = async () => {
-    const data = await request("/users/admin-overview");
+    const data = await request("/api/users/admin-overview");
     setOverview({
       totalUsers: data.totalUsers || 0,
       totalQuizzes: data.totalQuizzes || 0,
@@ -73,19 +73,19 @@ export default function Admin() {
   };
 
   const loadRecentAttempts = async () => {
-    const data = await request("/quiz/attempts");
+    const data = await request("/api/quiz/attempts");
     setRecentAttempts(data || []);
   };
 
   const loadProjects = async () => {
-    const data = await request("/projects");
+    const data = await request("/api/projects");
     const projectList = data || [];
     setProjects(projectList);
 
     const readinessPairs = await Promise.all(
       projectList.map(async (project) => {
         try {
-          const readiness = await request(`/projects/${project._id}/readiness`);
+          const readiness = await request(`/api/projects/${project._id}/readiness`);
           return [project._id, readiness];
         } catch {
           return [project._id, null];
@@ -97,12 +97,12 @@ export default function Admin() {
   };
 
   const loadTasks = async () => {
-    const data = await request("/tasks");
+    const data = await request("/api/tasks");
     setTasks(data || []);
   };
 
   const loadSubmissions = async () => {
-    const data = await request("/submissions");
+    const data = await request("/api/submissions");
     setSubmissions(data || []);
   };
 
@@ -116,7 +116,7 @@ export default function Admin() {
 
   const generateInvite = async () => {
     try {
-      const res = await request("/invites/create", "POST");
+      const res = await request("/api/invites/create", "POST");
       setInvite(res.code);
     } catch (err) {
       setMessage(err.message);
@@ -125,7 +125,7 @@ export default function Admin() {
 
   const updateTier = async (userId) => {
     try {
-      await request(`/users/${userId}/tier`, "PUT", {
+      await request(`/api/users/${userId}/tier`, "PUT", {
         tier: tiers[userId],
       });
       setMessage("User tier updated ✅");
@@ -157,7 +157,7 @@ export default function Admin() {
         throw new Error("Assign at least one user before saving the project");
       }
 
-      await request("/projects", "POST", {
+      await request("/api/projects", "POST", {
         title: projectForm.title,
         description: projectForm.description,
         requiredSkills: projectForm.requiredSkills,
@@ -615,7 +615,7 @@ export default function Admin() {
                       type="button"
                       onClick={() => {
                         if (window.confirm(`Delete project \"${summary.project.title}\"?`)) {
-                          request(`/projects/${summary.project._id}`, "DELETE")
+                          request(`/api/projects/${summary.project._id}`, "DELETE")
                             .then(() => {
                               setMessage("Project deleted ✅");
                               return loadDashboardData();

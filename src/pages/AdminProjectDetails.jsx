@@ -20,7 +20,7 @@ export default function AdminProjectDetails() {
 
   const fetchProject = async () => {
     try {
-      const data = await request(`/projects/${id}/readiness`);
+      const data = await request(`/api/projects/${id}/readiness`);
       setProject(data.project || null);
       setProjectReadiness(data || null);
       setLoadError("");
@@ -31,7 +31,7 @@ export default function AdminProjectDetails() {
 
   const fetchTasks = async () => {
     try {
-      const data = await request(`/tasks/project/${id}`);
+      const data = await request(`/api/tasks/project/${id}`);
       setTasks(data);
     } catch (err) {
       console.log(err.message);
@@ -40,7 +40,7 @@ export default function AdminProjectDetails() {
 
   const fetchUsers = async () => {
     try {
-      const data = await request("/users");
+      const data = await request("/api/users");
       setUsers(data);
     } catch (err) {
       console.log(err.message);
@@ -49,7 +49,7 @@ export default function AdminProjectDetails() {
 
   const createTask = async () => {
     try {
-      await request("/tasks", "POST", {
+      await request("/api/tasks", "POST", {
         title,
         description,
         project: id,
@@ -121,7 +121,7 @@ export default function AdminProjectDetails() {
               onClick={async () => {
                 if (!window.confirm("Delete project?")) return;
 
-                await request(`/projects/${id}`, "DELETE");
+                await request(`/api/projects/${id}`, "DELETE");
                 alert("Deleted ✅");
                 navigate("/dashboard");
               }}

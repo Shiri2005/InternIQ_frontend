@@ -44,12 +44,12 @@ export default function AdminAnalytics() {
     setLoading(true);
     try {
       const [overviewData, analyticsData, projectData, taskData, submissionData, attemptData] = await Promise.all([
-        request("/users/admin-overview"),
-        request("/ai/admin-analytics"),
-        request("/projects"),
-        request("/tasks"),
-        request("/submissions"),
-        request("/quiz/attempts"),
+        request("/api/users/admin-overview"),
+        request("/api/ai/admin-analytics"),
+        request("/api/projects"),
+        request("/api/tasks"),
+        request("/api/submissions"),
+        request("/api/quiz/attempts"),
       ]);
 
       setOverview({
@@ -72,7 +72,7 @@ export default function AdminAnalytics() {
       const readinessPairs = await Promise.all(
         (projectData || []).map(async (project) => {
           try {
-            const readiness = await request(`/projects/${project._id}/readiness`);
+            const readiness = await request(`/api/projects/${project._id}/readiness`);
             return [project._id, readiness];
           } catch {
             return [project._id, null];

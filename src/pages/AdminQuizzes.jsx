@@ -31,8 +31,8 @@ export default function AdminQuizzes() {
 
   const loadData = async () => {
     const [userData, quizData] = await Promise.all([
-      request("/users"),
-      request("/quizzes"),
+      request("/api/users"),
+      request("/api/quizzes"),
     ]);
 
     setUsers(userData);
@@ -156,7 +156,7 @@ export default function AdminQuizzes() {
         formData.append("quizPdf", pdfFile);
       }
 
-      await request("/quizzes", "POST", formData);
+      await request("/api/quizzes", "POST", formData);
       setStatusType("success");
       setStatus("Quiz created successfully");
       resetForm();
@@ -178,7 +178,7 @@ export default function AdminQuizzes() {
     try {
       setStatus("");
       setStatusType("info");
-      await request(`/quizzes/${quizId}`, "DELETE");
+      await request(`/api/quizzes/${quizId}`, "DELETE");
       setStatusType("success");
       setStatus("Quiz deleted successfully");
       await loadData();

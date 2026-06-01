@@ -13,7 +13,7 @@ export default function QuizList() {
   useEffect(() => {
     async function fetchQuizzes() {
       try {
-        const data = await request("/quizzes/user");
+        const data = await request("/api/quizzes/user");
         setQuizzes(data);
       } catch (err) {
         setError(err.message);

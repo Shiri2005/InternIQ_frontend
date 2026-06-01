@@ -16,7 +16,7 @@ export default function AdminSubmissions() {
 
   const fetchSubmissions = async () => {
     try {
-      const data = await request("/submissions");
+      const data = await request("/api/submissions");
       setSubmissions(data);
     } catch (err) {
       console.log(err.message);
@@ -29,7 +29,7 @@ export default function AdminSubmissions() {
         alert("Enter score and feedback");
         return;
       }
-      await request(`/submissions/${selectedId}/review`, "PUT", {
+      await request(`/api/submissions/${selectedId}/review`, "PUT", {
         score: Number(reviewData.score),
         feedback: reviewData.feedback,
       });

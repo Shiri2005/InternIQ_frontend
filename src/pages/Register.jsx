@@ -30,7 +30,7 @@ export default function Register() {
     setLoading(true);
 
     try {
-      await request("/users/register", "POST", form);
+      await request("/api/users/register", "POST", form);
 
       alert("Registered successfully ✅");
 

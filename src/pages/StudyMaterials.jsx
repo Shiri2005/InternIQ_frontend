@@ -23,9 +23,9 @@ export default function StudyMaterials() {
   const [loading, setLoading] = useState(false);
 
   const loadData = async () => {
-    const requestList = [request("/study-materials")];
+    const requestList = [request("/api/study-materials")];
     if (isAdmin) {
-      requestList.unshift(request("/users"));
+      requestList.unshift(request("/api/users"));
     }
 
     const results = await Promise.all(requestList);
@@ -89,7 +89,7 @@ export default function StudyMaterials() {
       formData.append("assignedUsers", JSON.stringify(selectedUsers));
       formData.append("studyPdf", pdfFile);
 
-      await request("/study-materials", "POST", formData);
+      await request("/api/study-materials", "POST", formData);
       setMessageType("success");
       setMessage("Study material uploaded successfully");
       resetForm();
@@ -104,7 +104,7 @@ export default function StudyMaterials() {
 
   const deleteMaterial = async (id) => {
     try {
-      await request(`/study-materials/${id}`, "DELETE");
+      await request(`/api/study-materials/${id}`, "DELETE");
       setMessageType("success");
       setMessage("Study material deleted");
       await loadData();

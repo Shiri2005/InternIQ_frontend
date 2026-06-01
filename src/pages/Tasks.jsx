@@ -9,7 +9,7 @@ export default function Tasks() {
 
   const fetchTasks = async () => {
     try {
-      const data = await request("/tasks");
+      const data = await request("/api/tasks");
       setTasks(data);
     } catch (err) {
       alert(err.message);
@@ -22,7 +22,7 @@ export default function Tasks() {
       return;
     }
     try {
-      await request("/tasks", "POST", { title });
+      await request("/api/tasks", "POST", { title });
       setTitle("");
       fetchTasks();
     } catch (err) {
@@ -32,7 +32,7 @@ export default function Tasks() {
 
   const markDone = async (id) => {
     try {
-      await request(`/tasks/${id}`, "PUT", { status: "completed" });
+      await request(`/api/tasks/${id}`, "PUT", { status: "completed" });
       fetchTasks();
     } catch (err) {
       alert(err.message);

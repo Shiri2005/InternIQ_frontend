@@ -23,9 +23,9 @@ export default function Dashboard() {
     let data;
 
     if ((localUser?.role || "").toLowerCase() === "admin") {
-      data = await request("/tasks");
+      data = await request("/api/tasks");
     } else {
-      data = await request("/tasks/my");
+      data = await request("/api/tasks/my");
     }
 
     setTasks(data);
@@ -40,9 +40,9 @@ export default function Dashboard() {
 
 
 if ((localUser?.role || "").toLowerCase() === "admin") {
-  data = await request("/projects");
+  data = await request("/api/projects");
 } else {
-  data = await request("/projects/my");
+  data = await request("/api/projects/my");
 }
 
 
@@ -54,7 +54,7 @@ if ((localUser?.role || "").toLowerCase() === "admin") {
 
   const fetchMyQuizzes = async () => {
     try {
-      const data = await request("/quiz/user");
+      const data = await request("/api/quiz/user");
       setMyQuizzes(data || []);
     } catch (err) {
       console.log(err.message);
@@ -63,7 +63,7 @@ if ((localUser?.role || "").toLowerCase() === "admin") {
 
   const fetchMyAttempts = async () => {
     try {
-      const data = await request("/quiz/attempts/me");
+      const data = await request("/api/quiz/attempts/me");
       setMyAttempts(data || []);
     } catch (err) {
       console.log(err.message);
@@ -72,7 +72,7 @@ if ((localUser?.role || "").toLowerCase() === "admin") {
 
   const fetchUser = async () => {
     try {
-      const data = await request("/users/me");
+      const data = await request("/api/users/me");
       setUser(data);
       if (!skillsInput.trim() && Array.isArray(data.skills) && data.skills.length > 0) {
         setSkillsInput(data.skills.join(", "));
@@ -86,7 +86,7 @@ if ((localUser?.role || "").toLowerCase() === "admin") {
     if (isAdmin) return;
     try {
       setAiLoading(true);
-      const data = await request(`/ai/insights?skills=${encodeURIComponent(skillsValue || "")}`);
+      const data = await request(`/api/ai/insights?skills=${encodeURIComponent(skillsValue || "")}`);
       setAiFeatures(data.features || null);
       setSuccessChance(data.successProbability ?? null);
     } catch (err) {
